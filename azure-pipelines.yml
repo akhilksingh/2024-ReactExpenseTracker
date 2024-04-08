@@ -20,13 +20,12 @@ steps:
     npm run build
   displayName: 'npm install and build'
 
-- task: CopyFiles@2
+- task: AzureWebApp@1
   inputs:
-    Contents: 'build/**' # Pull the build directory (React)
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathtoPublish: $(Build.ArtifactStagingDirectory) 
-    ArtifactName: 'www' # output artifact named www
+    azureSubscription: 'Visual Studio Enterprise Subscription(dfa9051a-33f0-4548-babc-6771d108854e)'
+    appType: 'webApp'
+    appName: 'check-expenses'
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    deploymentMethod: 'auto'
 
 
